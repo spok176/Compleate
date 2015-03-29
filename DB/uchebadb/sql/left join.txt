@@ -1,0 +1,4 @@
+select G.GroupName,P.PredmNameKratk,d.RaspID from raspisanie r
+  left join raspisanie d on r.raspid=d.raspid
+  left join groups g on r.groupid=g.groupid
+  left join predmet p on r.predmid=p.predmid

@@ -1,0 +1,71 @@
+object Form3: TForm3
+  Left = 584
+  Height = 569
+  Top = 173
+  Width = 1007
+  Caption = 'Группы'
+  ClientHeight = 569
+  ClientWidth = 1007
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '1.0.8.0'
+  object DBNavigator1: TDBNavigator
+    Left = 0
+    Height = 32
+    Top = 0
+    Width = 1007
+    Align = alTop
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 32
+    ClientWidth = 1007
+    DataSource = DataModule1.Datasource3
+    Options = []
+    TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Height = 537
+    Top = 32
+    Width = 1007
+    Align = alClient
+    Color = clWindow
+    Columns = <    
+      item
+        Font.Height = -13
+        Title.Caption = 'Группа'
+        Title.Font.Height = -15
+        FieldName = 'GROUPNAME'
+      end    
+      item
+        Font.Height = -13
+        Title.Caption = 'Специальность'
+        Title.Font.Height = -15
+        FieldName = 'GROUPSPEC'
+      end    
+      item
+        Font.Height = -13
+        Title.Caption = 'Год набора'
+        Title.Font.Height = -15
+        FieldName = 'SYEAR'
+      end>
+    DataSource = DataModule1.Datasource3
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 8
+    Height = 25
+    Top = 16
+    Width = 75
+    Caption = 'Commit'
+    Enabled = False
+    OnClick = Button1Click
+    TabOrder = 2
+    Visible = False
+  end
+end

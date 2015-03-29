@@ -1,0 +1,957 @@
+object DataModule1: TDataModule1
+  OnCreate = DataModuleCreate
+  OldCreateOrder = False
+  Height = 477
+  HorizontalOffset = 516
+  VerticalOffset = 266
+  Width = 713
+  object IBConnection1: TIBConnection
+    Connected = False
+    LoginPrompt = False
+    AfterConnect = IBConnection1AfterConnect
+    BeforeDisconnect = IBConnection1BeforeDisconnect
+    KeepConnection = False
+    Password = 'masterkey'
+    Transaction = SQLTransaction1
+    UserName = 'SYSDBA'
+    CharSet = 'UTF-8'
+    LogEvents = []
+    left = 40
+    top = 24
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Action = caCommit
+    Database = IBConnection1
+    Params.Strings = (
+      'write'
+      'read_committed'
+      'rec_version'
+      'nowait'
+    )
+    left = 40
+    top = 96
+  end
+  object SQLQuery1: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'THEMEID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'THEMEDATE'
+        DataType = ftDate
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'THEMETIP'
+        DataType = ftString
+        Precision = -1
+        Size = 40
+      end    
+      item
+        Name = 'THEME'
+        DataType = ftString
+        Precision = -1
+        Size = 1020
+      end>
+    AfterDelete = SQLQuery3AfterPost
+    AfterPost = SQLQuery3AfterPost
+    OnNewRecord = SQLQuery1NewRecord
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from THEMES'
+    )
+    UpdateSQL.Strings = (
+      'update THEMES set'
+      'ThemeID=:ThemeID,'
+      'ThemeDate=:ThemeDate,'
+      'ThemeTip=:ThemeTip,'
+      'Theme=:Theme,'
+      'RaspID=:RaspID'
+      'where ThemeID=:OLD_ThemeID'
+    )
+    InsertSQL.Strings = (
+      'insert into themes (themedate, raspid)'
+      'select current_date, raspid from raspisanie r'
+      'where r.raspdo between ''01.01.2011'' and ''01.07.2011'';'
+      ''
+      ''
+    )
+    DeleteSQL.Strings = (
+      'delete from Themes'
+      'where ThemeID=:ThemeID'
+    )
+    Params = <>
+    left = 152
+    top = 24
+    object SQLQuery1THEMEID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'THEMEID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object SQLQuery1THEMEDATE: TDateField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'THEMEDATE'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery1RASPID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'RASPID'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery1THEMETIP: TStringField
+      DisplayWidth = 20
+      FieldKind = fkData
+      FieldName = 'THEMETIP'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery1THEME: TStringField
+      DisplayWidth = 50
+      FieldKind = fkData
+      FieldName = 'THEME'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object StringField4: TStringField
+      DisplayWidth = 20
+      FieldKind = fkLookup
+      FieldName = 'GROUPNAME'
+      Index = 5
+      KeyFields = 'RASPID'
+      LookupCache = True
+      LookupDataSet = SQLQuery10
+      LookupKeyFields = 'RASPID'
+      LookupResultField = 'GROUPNAME'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object StringField5: TStringField
+      DisplayWidth = 20
+      FieldKind = fkLookup
+      FieldName = 'PREDMNAMEKRATK'
+      Index = 6
+      KeyFields = 'RASPID'
+      LookupCache = True
+      LookupDataSet = SQLQuery10
+      LookupKeyFields = 'RASPID'
+      LookupResultField = 'PREDMNAMEKRATK'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+  end
+  object SQLQuery2: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'RASPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'GROUPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'PREDMID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'NUROKA'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPOT'
+        DataType = ftDate
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPDO'
+        DataType = ftDate
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPCHASOV'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPDEN'
+        DataType = ftString
+        Precision = -1
+        Size = 12
+      end>
+    AfterDelete = SQLQuery3AfterPost
+    AfterPost = SQLQuery3AfterPost
+    BeforeOpen = SQLQuery2BeforeOpen
+    OnFilterRecord = SQLQuery2FilterRecord
+    OnNewRecord = SQLQuery2NewRecord
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from RASPISANIE order by RaspId,RaspDen'
+    )
+    UpdateSQL.Strings = (
+      'update RASPISANIE set'
+      'RaspID=:RaspID,'
+      'RaspDen=:RaspDen,'
+      'GroupID=:GroupID,'
+      'PredmID=:PredmID,'
+      'nUroka=:nUroka,'
+      'RASPCHASOV=:RASPCHASOV,'
+      'RaspOt=:RaspOt,'
+      'RaspDo=:RaspDo'
+      'where RaspID=:OLD_RaspID'
+    )
+    InsertSQL.Strings = (
+      'insert into RASPISANIE'
+      '(RaspDen,GroupID,PredmID,nUroka,RaspOt,RaspDo,RASPCHASOV)'
+      'values (:RaspDen,:GroupID,:PredmID,:nUroka,:RaspOt,:RaspDo,:RASPCHASOV)'
+      ''
+      ''
+    )
+    DeleteSQL.Strings = (
+      'delete from RASPISANIE'
+      'where RaspID=:RaspID'
+    )
+    Params = <>
+    left = 152
+    top = 96
+    object SQLQuery2RASPID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'RASPID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object SQLQuery2RASPDEN: TStringField
+      DisplayWidth = 12
+      FieldKind = fkData
+      FieldName = 'RASPDEN'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 12
+    end
+    object SQLQuery2GROUPID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'GROUPID'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery2PREDMID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'PREDMID'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery2NUROKA: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'NUROKA'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery2RASPCHASOV: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'RASPCHASOV'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery2RASPOT: TDateField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'RASPOT'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery2RASPDO: TDateField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'RASPDO'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object StringField2: TStringField
+      DisplayWidth = 10
+      FieldKind = fkLookup
+      FieldName = 'GROUPNAME'
+      Index = 8
+      KeyFields = 'GROUPID'
+      LookupCache = True
+      LookupDataSet = SQLQuery8
+      LookupKeyFields = 'GROUPID'
+      LookupResultField = 'GROUPNAME'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+    object StringField3: TStringField
+      DisplayWidth = 10
+      FieldKind = fkLookup
+      FieldName = 'PREDMNAMEKRATK'
+      Index = 9
+      KeyFields = 'PREDMID'
+      LookupCache = True
+      LookupDataSet = SQLQuery7
+      LookupKeyFields = 'PREDMID'
+      LookupResultField = 'PREDMNAMEKRATK'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+  end
+  object SQLQuery3: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'GROUPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'GROUPNAME'
+        DataType = ftString
+        Precision = -1
+        Size = 40
+      end    
+      item
+        Name = 'GROUPSPEC'
+        DataType = ftString
+        Precision = -1
+        Size = 400
+      end    
+      item
+        Name = 'SYEAR'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end>
+    AfterDelete = SQLQuery3AfterPost
+    AfterPost = SQLQuery3AfterPost
+    BeforeClose = SQLQuery3BeforeClose
+    OnNewRecord = SQLQuery3NewRecord
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from GROUPS'
+    )
+    UpdateSQL.Strings = (
+      'update GROUPS set'
+      'GroupID=:GroupID,'
+      'GroupName=:GroupName,'
+      'sYear=:sYear,'
+      'GroupSpec=:GroupSpec'
+      'where GroupID=:OLD_GroupID'
+    )
+    InsertSQL.Strings = (
+      'insert into GROUPS'
+      '(GroupName,sYear,GroupSpec) values'
+      '(:GroupName,:sYear,:GroupSpec)'
+    )
+    DeleteSQL.Strings = (
+      'delete from GROUPS'
+      'where GROUPID=:GROUPID'
+    )
+    Params = <>
+    left = 152
+    top = 176
+    object SQLQuery3GROUPID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'GROUPID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object SQLQuery3GROUPNAME: TStringField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'GROUPNAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+    object SQLQuery3GROUPSPEC: TStringField
+      DisplayWidth = 50
+      FieldKind = fkData
+      FieldName = 'GROUPSPEC'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 100
+    end
+    object SQLQuery3SYEAR: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'SYEAR'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object SQLQuery4: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'PREDMID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'PREDMNAMEKRATK'
+        DataType = ftString
+        Precision = -1
+        Size = 120
+      end    
+      item
+        Name = 'PREDMNAMEPOLN'
+        DataType = ftString
+        Precision = -1
+        Size = 1020
+      end    
+      item
+        Name = 'PREDMCHASOV'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end>
+    AfterDelete = SQLQuery3AfterPost
+    AfterPost = SQLQuery3AfterPost
+    BeforeClose = SQLQuery3BeforeClose
+    OnNewRecord = SQLQuery4NewRecord
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from PREDMET'
+    )
+    UpdateSQL.Strings = (
+      'update PREDMET set'
+      'PredmID=:PredmID,'
+      'PredmNameKratk=:PredmNameKratk,'
+      'PredmNamePoln=:PredmNamePoln,'
+      'PredmChasov=:PredmChasov'
+      'where PredmID=:OLD_PredmID'
+    )
+    InsertSQL.Strings = (
+      'insert into PREDMET'
+      '(PredmNameKratk,PredmNamePoln,PredmChasov)'
+      'values'
+      '(:PredmNameKratk,:PredmNamePoln,:PredmChasov)'
+    )
+    DeleteSQL.Strings = (
+      'delete from PREDMET'
+      'where PredmID=:PredmID'
+    )
+    Params = <>
+    left = 152
+    top = 256
+    object SQLQuery4PREDMID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'PREDMID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object SQLQuery4PREDMNAMEKRATK: TStringField
+      DisplayWidth = 20
+      FieldKind = fkData
+      FieldName = 'PREDMNAMEKRATK'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object SQLQuery4PREDMNAMEPOLN: TStringField
+      DisplayWidth = 20
+      FieldKind = fkData
+      FieldName = 'PREDMNAMEPOLN'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object SQLQuery4PREDMCHASOV: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'PREDMCHASOV'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object SQLQuery5: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'SEMESTRID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'PREDMID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'SEMESTRCHASOV'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'NSEMESTRA'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end>
+    AfterDelete = SQLQuery3AfterPost
+    AfterPost = SQLQuery3AfterPost
+    BeforeClose = SQLQuery3BeforeClose
+    OnNewRecord = SQLQuery5NewRecord
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from nSemestra where PREDMID=:PREDMID'
+    )
+    UpdateSQL.Strings = (
+      'update nSemestra set'
+      'SemestrID=:SemestrID,'
+      'NSEMESTRA=:NSEMESTRA,'
+      'PREDMID=:PREDMID,'
+      'SemestrChasov=:SemestrChasov'
+      'where SemestrID=:OLD_SemestrID'
+    )
+    InsertSQL.Strings = (
+      'insert into nSemestra'
+      '(nSemestra,PREDMID,SemestrChasov)'
+      'values'
+      '(:nSemestra,:PREDMID,:SemestrChasov)'
+    )
+    DeleteSQL.Strings = (
+      'delete from nSemestra'
+      'where SemestrID=:SemestrID'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'PREDMID'
+        ParamType = ptInput
+      end>
+    DataSource = Datasource4
+    left = 152
+    top = 328
+    object SQLQuery5SEMESTRID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'SEMESTRID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object SQLQuery5PREDMID: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'PREDMID'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object StringField1: TStringField
+      DisplayWidth = 10
+      FieldKind = fkLookup
+      FieldName = 'PREDMNAMEKRATK'
+      Index = 2
+      KeyFields = 'PREDMID'
+      LookupCache = True
+      LookupDataSet = SQLQuery7
+      LookupKeyFields = 'PREDMID'
+      LookupResultField = 'PREDMNAMEKRATK'
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+    object SQLQuery5SEMESTRCHASOV: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'SEMESTRCHASOV'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object SQLQuery5NSEMESTRA: TLongintField
+      DisplayWidth = 10
+      FieldKind = fkData
+      FieldName = 'NSEMESTRA'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object Datasource1: TDataSource
+    DataSet = SQLQuery1
+    left = 232
+    top = 24
+  end
+  object Datasource2: TDataSource
+    DataSet = SQLQuery2
+    left = 232
+    top = 96
+  end
+  object Datasource3: TDataSource
+    DataSet = SQLQuery3
+    left = 232
+    top = 176
+  end
+  object Datasource4: TDataSource
+    DataSet = SQLQuery4
+    left = 232
+    top = 256
+  end
+  object Datasource5: TDataSource
+    DataSet = SQLQuery5
+    left = 232
+    top = 328
+  end
+  object SQLQuery6: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'RASPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPDEN'
+        DataType = ftString
+        Precision = -1
+        Size = 16
+      end    
+      item
+        Name = 'GROUPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'PREDMID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'NUROKA'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPYEAR'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPSEMESTR'
+        DataType = ftString
+        Precision = -1
+        Size = 40
+      end    
+      item
+        Name = 'RASPCHASOV'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end>
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from RASPISANIE'
+    )
+    Params = <>
+    left = 304
+    top = 96
+  end
+  object SQLQuery7: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'PREDMID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'PREDMNAMEKRATK'
+        DataType = ftString
+        Precision = -1
+        Size = 120
+      end    
+      item
+        Name = 'PREDMNAMEPOLN'
+        DataType = ftString
+        Precision = -1
+        Size = 1020
+      end    
+      item
+        Name = 'PREDMCHASOV'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end>
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from PREDMET'
+    )
+    Params = <>
+    left = 304
+    top = 256
+  end
+  object SQLQuery8: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'GROUPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'GROUPNAME'
+        DataType = ftString
+        Precision = -1
+        Size = 40
+      end    
+      item
+        Name = 'GROUPSPEC'
+        DataType = ftString
+        Precision = -1
+        Size = 400
+      end    
+      item
+        Name = 'SYEAR'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end>
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from GROUPS'
+    )
+    Params = <>
+    left = 304
+    top = 176
+  end
+  object SQLQuery9: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'THEMEID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'THEMEDATE'
+        DataType = ftDate
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'RASPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end    
+      item
+        Name = 'THEMETIP'
+        DataType = ftString
+        Precision = -1
+        Size = 10
+      end    
+      item
+        Name = 'THEME'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end>
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select * from THEMES'
+    )
+    Params = <>
+    left = 304
+    top = 24
+  end
+  object SQLQuery10: TSQLQuery
+    FieldDefs = <    
+      item
+        Name = 'GROUPNAME'
+        DataType = ftString
+        Precision = -1
+        Size = 40
+      end    
+      item
+        Name = 'PREDMNAMEKRATK'
+        DataType = ftString
+        Precision = -1
+        Size = 120
+      end    
+      item
+        Name = 'RASPID'
+        DataType = ftInteger
+        Precision = -1
+        Size = 0
+      end>
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select G.GroupName,P.PredmNameKratk,d.RaspID from raspisanie r'
+      '  left join raspisanie d on r.raspid=d.raspid'
+      '  left join groups g on r.groupid=g.groupid'
+      '  left join predmet p on r.predmid=p.predmid'
+    )
+    Params = <>
+    left = 376
+    top = 24
+  end
+  object SQLQuery11: TSQLQuery
+    FieldDefs = <>
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'insert into themes (themedate, raspid)'
+      'select current_date, raspid from raspisanie r'
+      'where raspden like :rasp_day;'
+      ''
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'rasp_day'
+        ParamType = ptInput
+      end>
+    left = 448
+    top = 24
+  end
+  object SQLQuery12: TSQLQuery
+    FieldDefs = <>
+    Database = IBConnection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'select sum(semestrchasov) from nSemestra'
+      'where predmid=:predmid'
+      ''
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'predmid'
+        ParamType = ptInput
+      end>
+    left = 368
+    top = 336
+  end
+end

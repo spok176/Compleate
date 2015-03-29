@@ -1,0 +1,80 @@
+object Form5: TForm5
+  Left = 177
+  Height = 555
+  Top = 267
+  Width = 998
+  Caption = 'Номер семестра'
+  ClientHeight = 555
+  ClientWidth = 998
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '1.2.6.0'
+  object DBNavigator1: TDBNavigator
+    Left = 0
+    Height = 32
+    Top = 0
+    Width = 998
+    Align = alTop
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 32
+    ClientWidth = 998
+    DataSource = DataModule1.Datasource5
+    OnClick = DBNavigator1Click
+    Options = []
+    TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Height = 500
+    Top = 32
+    Width = 998
+    Align = alClient
+    Color = clWindow
+    Columns = <    
+      item
+        Font.Height = -13
+        Title.Caption = 'Номер семестра'
+        Title.Font.Height = -15
+        FieldName = 'NSEMESTRA'
+      end    
+      item
+        Font.Height = -13
+        Title.Caption = 'Предмет'
+        Title.Font.Height = -15
+        FieldName = 'PREDMNAMEKRATK'
+      end    
+      item
+        Font.Height = -13
+        Title.Caption = 'Часов на семестр'
+        Title.Font.Height = -15
+        FieldName = 'SEMESTRCHASOV'
+      end>
+    DataSource = DataModule1.Datasource5
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 24
+    Height = 25
+    Top = 24
+    Width = 75
+    Caption = 'Commit'
+    Enabled = False
+    OnClick = Button1Click
+    TabOrder = 2
+    Visible = False
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 23
+    Top = 532
+    Width = 998
+    Panels = <>
+    OnClick = StatusBar1Click
+  end
+end
