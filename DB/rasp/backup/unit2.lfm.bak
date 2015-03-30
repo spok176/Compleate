@@ -11,7 +11,7 @@ object DataModule1: TDataModule1
     AfterConnect = IBConnection1AfterConnect
     BeforeDisconnect = IBConnection1BeforeDisconnect
     KeepConnection = False
-    Password = 'masterkey'
+    Password = 'z0rex'
     Transaction = SQLTransaction1
     UserName = 'SYSDBA'
     CharSet = 'UTF-8'
@@ -690,27 +690,27 @@ object DataModule1: TDataModule1
       Required = False
     end
   end
-  object Datasource1: TDataSource
+  object Datasource1: TDatasource
     DataSet = SQLQuery1
     left = 232
     top = 24
   end
-  object Datasource2: TDataSource
+  object Datasource2: TDatasource
     DataSet = SQLQuery2
     left = 232
     top = 96
   end
-  object Datasource3: TDataSource
+  object Datasource3: TDatasource
     DataSet = SQLQuery3
     left = 232
     top = 176
   end
-  object Datasource4: TDataSource
+  object Datasource4: TDatasource
     DataSet = SQLQuery4
     left = 232
     top = 256
   end
-  object Datasource5: TDataSource
+  object Datasource5: TDatasource
     DataSet = SQLQuery5
     left = 232
     top = 328
@@ -941,7 +941,7 @@ object DataModule1: TDataModule1
     Database = IBConnection1
     Transaction = SQLTransaction1
     SQL.Strings = (
-      'select sum(semestrchasov) from nSemestra'
+      'select sum(semestrchasov) as predmchasov from nSemestra'
       'where predmid=:predmid'
       ''
     )
@@ -951,7 +951,8 @@ object DataModule1: TDataModule1
         Name = 'predmid'
         ParamType = ptInput
       end>
+    DataSource = Datasource4
     left = 368
-    top = 256
+    top = 336
   end
 end

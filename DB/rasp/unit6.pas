@@ -52,7 +52,9 @@ procedure TForm5.StatusBar1Click(Sender: TObject);
 begin
      {datamodule1.SQLQuery12.SQL.Add('select sum(semestrchasov) from nSemestrawhere predmid=:predmid');
      datamodule1.SQLQuery12.Open;}
-  statusbar1.SimpleText:='Часов на семестр: '+inttostr(datamodule1.SQLQuery5.FieldValues['semestrchasov'])+' / '+'Часов всего: '+inttostr(datamodule1.SQLQuery4.FieldValues['predmchasov']);
+  datamodule1.SQLQuery12.Open;
+  statusbar1.SimpleText:='Часов всего: '+inttostr(datamodule1.SQLQuery4.FieldValues['predmchasov'])+' / '+'Часов на семестр: '+inttostr(datamodule1.SQLQuery12.FieldByName('predmchasov').AsInteger);
+  datamodule1.SQLQuery12.Close;
 end;
 
 procedure TForm5.Button1Click(Sender: TObject);

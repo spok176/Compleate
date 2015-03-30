@@ -941,7 +941,7 @@ object DataModule1: TDataModule1
     Database = IBConnection1
     Transaction = SQLTransaction1
     SQL.Strings = (
-      'select sum(semestrchasov) from nSemestra'
+      'select sum(semestrchasov) as predmchasov from nSemestra'
       'where predmid=:predmid'
       ''
     )
@@ -951,6 +951,7 @@ object DataModule1: TDataModule1
         Name = 'predmid'
         ParamType = ptInput
       end>
+    DataSource = Datasource4
     left = 368
     top = 336
   end

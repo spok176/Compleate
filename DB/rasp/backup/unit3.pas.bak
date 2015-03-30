@@ -73,7 +73,7 @@ var
   MyWorkbook: TsWorkbook;
   MyWorksheet: TsWorksheet;
   MyDir: string;
-  col,i,j:integer;
+  col, col2,i, j:integer;
 begin
   // Initialization
   MyDir := ExtractFilePath(ParamStr(0));
@@ -86,26 +86,49 @@ begin
 
 // Write some string cells
   col:=dbgrid1.Columns.Count-1;
-
-  for i:=0 to col do
+  col2:=datamodule1.SQLQuery2.RecordCount;
+ { for i:=0 to col2 do
   begin
-       MyWorksheet.WriteUTF8Text(0,i,Utf8ToAnsi(UTF8Encode(dbgrid1.Columns.Items[i].title.Caption)));
-  end;
-
-  col:=datamodule1.SQLQuery2.RecordCount;
-
-  for i:=1 to col do
+       //MyWorksheet.WriteUTF8Text(0,i,Utf8ToAnsi(UTF8Encode(dbgrid1.Columns.Items[i].title.Caption)));
+       MyWorksheet.WriteUTF8Text(0,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
+       datamodule1.SQLQuery2.Next;
+  for j:=1 to col2 do
+     begin
+       datamodule1.SQLQuery2.Open;
+       datamodule1.SQLQuery2.First;
+       MyWorksheet.WriteUTF8Text(i,j,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
+       MyWorksheet.WriteUTF8Text(i,j,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['NUROKA'])));
+       MyWorksheet.WriteUTF8Text(i,j,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['PREDMNAMEKRATK'])));
+       MyWorksheet.WriteUTF8Text(i,j,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['GROUPNAME'])));
+       MyWorksheet.WriteUTF8Text(i,j,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPCHASOV'])));
+       MyWorksheet.WriteUTF8Text(i,j,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPOT'])));
+       MyWorksheet.WriteUTF8Text(i,j,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDO'])));
+       datamodule1.SQLQuery2.Next;
+      end; }
+  //end;
+  //datamodule1.SQLQuery2.First;
+  //i:=0;
+  //datamodule1.SQLQuery2.IndexFieldNames:='raspden';
+  //while i<col2 do
+  //not datamodule1.sqlquery2.EOF do
+  for i:=1 to col2 do
   begin
+       //i:=i+1;
        datamodule1.SQLQuery2.Open;
        //datamodule1.SQLQuery2.First;
-       MyWorksheet.WriteUTF8Text(i,0,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
-       MyWorksheet.WriteUTF8Text(i,1,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['NUROKA'])));
-       MyWorksheet.WriteUTF8Text(i,2,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['PREDMNAMEKRATK'])));
-       MyWorksheet.WriteUTF8Text(i,3,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['GROUPNAME'])));
-       MyWorksheet.WriteUTF8Text(i,4,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPCHASOV'])));
-       MyWorksheet.WriteUTF8Text(i,5,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPOT'])));
-       MyWorksheet.WriteUTF8Text(i,6,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDO'])));
+       MyWorksheet.WriteUTF8Text(0,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
+       MyWorksheet.WriteUTF8Text(1,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['NUROKA'])));
+       MyWorksheet.WriteUTF8Text(2,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['PREDMNAMEKRATK'])));
+       MyWorksheet.WriteUTF8Text(3,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['GROUPNAME'])));
+       //MyWorksheet.WriteUTF8Text(i,0,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
+       //MyWorksheet.WriteUTF8Text(i,4,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPCHASOV'])));
+       //MyWorksheet.WriteUTF8Text(i,5,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPOT'])));
+       //MyWorksheet.WriteUTF8Text(i,6,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDO'])));
        datamodule1.SQLQuery2.Next;
+       for j:=0 to 4 do
+       begin
+          MyWorksheet.WriteUTF8Text(j,0,Utf8ToAnsi(UTF8Encode(dbgrid1.Columns.Items[j].title.Caption)));
+       end;
   end;
 
   // Save the spreadsheet to a file
@@ -116,7 +139,7 @@ end;
 
 procedure TForm2.Button2Click(Sender: TObject);
 begin
-   sort(datamodule1.SQLQuery2.FieldValues['GROUPNAME']);
+
 end;
 
 procedure TForm2.Button3Click(Sender: TObject);
