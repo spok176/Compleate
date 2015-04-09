@@ -110,16 +110,20 @@ begin
   //i:=0;
   //datamodule1.SQLQuery2.IndexFieldNames:='raspden';
   //while i<col2 do
-  //not datamodule1.sqlquery2.EOF do
+  {//not datamodule1.sqlquery2.EOF do
+  for i:=1 to col2 do
+  }
+  datamodule1.SQLQuery2.First;
+  while not datamodule1.SQLQuery2.EOF do
   for i:=1 to col2 do
   begin
        //i:=i+1;
        datamodule1.SQLQuery2.Open;
        //datamodule1.SQLQuery2.First;
-       MyWorksheet.WriteUTF8Text(0,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
-       MyWorksheet.WriteUTF8Text(1,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['NUROKA'])));
-       MyWorksheet.WriteUTF8Text(2,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['PREDMNAMEKRATK'])));
-       MyWorksheet.WriteUTF8Text(3,i,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['GROUPNAME'])));
+       MyWorksheet.WriteUTF8Text(i,0,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
+       MyWorksheet.WriteUTF8Text(i,1,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['NUROKA'])));
+       MyWorksheet.WriteUTF8Text(i,2,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['PREDMNAMEKRATK'])));
+       MyWorksheet.WriteUTF8Text(i,3,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['GROUPNAME'])));
        //MyWorksheet.WriteUTF8Text(i,0,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPDEN'])));
        //MyWorksheet.WriteUTF8Text(i,4,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPCHASOV'])));
        //MyWorksheet.WriteUTF8Text(i,5,Utf8ToAnsi(UTF8Encode(datamodule1.SQLQuery2.FieldValues['RASPOT'])));
@@ -127,7 +131,7 @@ begin
        datamodule1.SQLQuery2.Next;
        for j:=0 to 3 do
        begin
-          MyWorksheet.WriteUTF8Text(j,0,Utf8ToAnsi(UTF8Encode(dbgrid1.Columns.Items[j].title.Caption)));
+          MyWorksheet.WriteUTF8Text(0,j,Utf8ToAnsi(UTF8Encode(dbgrid1.Columns.Items[j].title.Caption)));
        end;
   end;
 
