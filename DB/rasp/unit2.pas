@@ -35,6 +35,7 @@ type
     SQLQuery2RASPDEN: TStringField;
     SQLQuery2RASPDO: TDateField;
     SQLQuery2RASPID: TLongintField;
+    SQLQuery2RASPKAB: TStringField;
     SQLQuery2RASPOT: TDateField;
     SQLQuery3: TSQLQuery;
     SQLQuery3GROUPID: TLongintField;
@@ -62,6 +63,7 @@ type
     StringField4: TStringField;
     StringField5: TStringField;
     procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
     procedure IBConnection1AfterConnect(Sender: TObject);
     procedure IBConnection1BeforeConnect(Sender: TObject);
     procedure IBConnection1BeforeDisconnect(Sender: TObject);
@@ -105,6 +107,9 @@ begin
       ini:=TIniFile.Create(extractfilepath(paramstr(0))+'MyFile.ini');
       Datamodule1.IBConnection1.DatabaseName:=ini.ReadString('DB','URL','Default string');
       IBconnection1.Open;
+      form1:=TForm1.Create(Application);
+      //form1.ShowModal;
+      //form1.Free;
       form1.statusbar1.SimpleText:='Сегодня: ' + datetostr(Date) + '. Соеденение с базой успешно установлено!';
    except
     on EIBDatabaseError do
@@ -113,6 +118,10 @@ begin
             Application.Terminate;
        end;
    End;
+end;
+
+procedure TDataModule1.DataModuleDestroy(Sender: TObject);
+begin
 end;
 
 procedure TDataModule1.IBConnection1AfterConnect(Sender: TObject);
@@ -179,7 +188,7 @@ end;
 procedure TDataModule1.SQLQuery2FilterRecord(DataSet: TDataSet;
   var Accept: Boolean);
 begin
-    if form2.checkbox1.checked=true then
+    {if form2.checkbox1.checked=true then
     begin
       if form2.combobox1.text='' then
       begin
@@ -189,7 +198,8 @@ begin
            Accept:=(DataSet.FieldByName('raspot').AsString=ED2) and (DataSet.FieldByName('raspden').AsString=ED);
       end;
     end
-    else Accept:=(DataSet.FieldByName('raspden').AsString=ED);
+    else Accept:=(DataSet.FieldByName('raspden').AsString=ED);}
+   Accept:=(DataSet.FieldByName('groupname').AsString=ED);
 end;
 
 procedure TDataModule1.SQLQuery2NewRecord(DataSet: TDataSet);

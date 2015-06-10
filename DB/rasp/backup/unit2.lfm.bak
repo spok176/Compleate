@@ -1,9 +1,10 @@
 object DataModule1: TDataModule1
   OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
   OldCreateOrder = False
   Height = 477
-  HorizontalOffset = 516
-  VerticalOffset = 266
+  HorizontalOffset = 381
+  VerticalOffset = 257
   Width = 713
   object IBConnection1: TIBConnection
     Connected = False
@@ -11,9 +12,9 @@ object DataModule1: TDataModule1
     AfterConnect = IBConnection1AfterConnect
     BeforeDisconnect = IBConnection1BeforeDisconnect
     KeepConnection = False
-    Password = 'z0rex'
+    Password = 'MISHA'
     Transaction = SQLTransaction1
-    UserName = 'SYSDBA'
+    UserName = 'MISHA'
     CharSet = 'UTF-8'
     LogEvents = []
     left = 40
@@ -225,7 +226,13 @@ object DataModule1: TDataModule1
         Name = 'RASPDEN'
         DataType = ftString
         Precision = -1
-        Size = 12
+        Size = 0
+      end    
+      item
+        Name = 'RASPKAB'
+        DataType = ftString
+        Precision = -1
+        Size = 400
       end>
     AfterDelete = SQLQuery3AfterPost
     AfterPost = SQLQuery3AfterPost
@@ -284,11 +291,22 @@ object DataModule1: TDataModule1
       Required = False
       Size = 12
     end
+    object SQLQuery2RASPKAB: TStringField
+      DisplayWidth = 400
+      FieldKind = fkData
+      FieldName = 'RASPKAB'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 12
+    end
     object SQLQuery2GROUPID: TLongintField
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'GROUPID'
-      Index = 2
+      Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -298,7 +316,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'PREDMID'
-      Index = 3
+      Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -308,7 +326,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'NUROKA'
-      Index = 4
+      Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -318,7 +336,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'RASPCHASOV'
-      Index = 5
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -328,7 +346,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'RASPOT'
-      Index = 6
+      Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -338,7 +356,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 10
       FieldKind = fkData
       FieldName = 'RASPDO'
-      Index = 7
+      Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -348,7 +366,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'GROUPNAME'
-      Index = 8
+      Index = 9
       KeyFields = 'GROUPID'
       LookupCache = True
       LookupDataSet = SQLQuery8
@@ -363,7 +381,7 @@ object DataModule1: TDataModule1
       DisplayWidth = 10
       FieldKind = fkLookup
       FieldName = 'PREDMNAMEKRATK'
-      Index = 9
+      Index = 10
       KeyFields = 'PREDMID'
       LookupCache = True
       LookupDataSet = SQLQuery7
@@ -690,27 +708,27 @@ object DataModule1: TDataModule1
       Required = False
     end
   end
-  object Datasource1: TDatasource
+  object Datasource1: TDataSource
     DataSet = SQLQuery1
     left = 232
     top = 24
   end
-  object Datasource2: TDatasource
+  object Datasource2: TDataSource
     DataSet = SQLQuery2
     left = 232
     top = 96
   end
-  object Datasource3: TDatasource
+  object Datasource3: TDataSource
     DataSet = SQLQuery3
     left = 232
     top = 176
   end
-  object Datasource4: TDatasource
+  object Datasource4: TDataSource
     DataSet = SQLQuery4
     left = 232
     top = 256
   end
-  object Datasource5: TDatasource
+  object Datasource5: TDataSource
     DataSet = SQLQuery5
     left = 232
     top = 328

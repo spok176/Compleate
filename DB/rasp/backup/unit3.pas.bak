@@ -18,9 +18,14 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
     CalendarDialog1: TCalendarDialog;
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
     ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
     DBGrid1: TDBGrid;
     DBNavigator1: TDBNavigator;
     Edit2: TEdit;
@@ -28,6 +33,8 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
+    OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     Panel2: TPanel;
     Splitter1: TSplitter;
@@ -35,6 +42,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
@@ -64,7 +72,7 @@ var
 
 implementation
 
-uses Unit1, Unit2, Unit4;
+uses Unit1, Unit2, Unit4, Unit7;
 
 { TForm2 }
 
@@ -115,6 +123,7 @@ begin
   }
   datamodule1.SQLQuery2.First;
   while not datamodule1.SQLQuery2.EOF do
+  for i:=1 to col2 do
   begin
        //i:=i+1;
        datamodule1.SQLQuery2.Open;
@@ -142,13 +151,50 @@ end;
 
 procedure TForm2.Button2Click(Sender: TObject);
 begin
-
+  form6:=TForm6.Create(Application);
+  form6.ShowModal;
+  form6.Free;
 end;
 
 procedure TForm2.Button3Click(Sender: TObject);
+var
+   isWhere : boolean;
 begin
-  //showmessage('Скоро..');
-  if checkbox1.Checked = True then
+  Datamodule1.SQLQuery2.Close; Datamodule1.SQLQuery2.SQL.Clear; isWhere:=false;
+  Datamodule1.SQLQuery2.SQL.Add('select * from RASPISANIE');
+
+  if checkbox1.Checked then
+   if isWhere then
+    begin
+      Datamodule1.SQLQuery2.SQL.Add(' and RASPDEN>'+ComboBox1.Text);
+      isWhere:=true;
+    end else Datamodule1.SQLQuery2.SQL.Add(' where RASPDEN>'+ComboBox1.Text);
+
+  if checkbox2.Checked then
+   if isWhere then
+    begin
+      Datamodule1.SQLQuery2.SQL.Add(' and raspot>'+Edit2.Text);
+      isWhere:=true;
+    end else Datamodule1.SQLQuery2.SQL.Add(' where raspot>'+Edit2.Text);
+
+  if checkbox3.Checked then
+   if isWhere then
+    begin
+      Datamodule1.SQLQuery2.SQL.Add(' and raspdo>'+Edit3.Text);
+      isWhere:=true;
+    end else Datamodule1.SQLQuery2.SQL.Add(' where raspdo>'+Edit3.Text);
+
+  if checkbox4.Checked then
+   if isWhere then
+    begin
+      Datamodule1.SQLQuery2.SQL.Add(' and groupname>'+ComboBox2.Text);
+      isWhere:=true;
+    end else Datamodule1.SQLQuery2.Sql.Add(' where groupname>'+ComboBox2.Text);
+
+  Datamodule1.SQLQuery2.SQL.Add(' order by RaspId,RaspDen');
+  Datamodule1.SQLQuery2.Open;
+
+  {if checkbox1.Checked = True then
   begin
     if combobox1.Text = '' then
     begin
@@ -169,13 +215,20 @@ begin
     DataModule1.SQLQuery2.Filtered := False;
     DataModule1.ED := combobox1.Text;
     DataModule1.SQLQuery2.Filtered := True;
-  end;
+  end;   }
 end;
 
 procedure TForm2.Button4Click(Sender: TObject);
 begin
   DataModule1.SQLQuery2.Filtered := False;
   edit2.Text := '';
+end;
+
+procedure TForm2.Button5Click(Sender: TObject);
+begin
+  Datamodule1.SQLQuery2.Filtered := False;
+  DataModule1.ED := combobox2.Text;
+  DataModule1.SQLQuery2.Filtered := True;
 end;
 
 procedure TForm2.CheckBox1Change(Sender: TObject);
@@ -223,8 +276,13 @@ end;
 
 procedure TForm2.FormCreate(Sender: TObject);
 begin
-  datamodule1.IBconnection1.Close;
-  datamodule1.IBconnection1.Open;
+  datamodule1.SQLQuery3.First;
+  while not datamodule1.SQLQuery3.EOF do
+  begin
+    datamodule1.SQLQuery3.Open;
+    ComboBox2.Items.Add(datamodule1.SQLQuery3.FieldValues['GroupName']);
+    datamodule1.SQLQuery3.Next;
+  end;
 end;
 
 procedure TForm2.Label1Click(Sender: TObject);

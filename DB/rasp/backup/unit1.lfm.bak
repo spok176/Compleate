@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 107
+  Left = 183
   Height = 518
-  Top = 287
+  Top = 328
   Width = 973
   Caption = 'Темы'
   ClientHeight = 518
@@ -18,6 +18,7 @@ object Form1: TForm1
     ClientHeight = 52
     ClientWidth = 973
     TabOrder = 0
+    OnClick = Panel1Click
     object Button1: TButton
       Left = 8
       Height = 25
@@ -85,10 +86,10 @@ object Form1: TForm1
     end
     object ComboBox1: TComboBox
       Left = 616
-      Height = 23
+      Height = 21
       Top = 16
       Width = 100
-      ItemHeight = 15
+      ItemHeight = 13
       Items.Strings = (
         'ПН'
         'ВТ'

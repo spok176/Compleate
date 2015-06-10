@@ -45,8 +45,7 @@ end;
 
 procedure TForm3.FormCreate(Sender: TObject);
 begin
-     datamodule1.IBconnection1.close;
-     datamodule1.IBconnection1.open;
+
 end;
 
 {$R *.lfm}

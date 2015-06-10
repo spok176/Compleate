@@ -1,0 +1,78 @@
+object Form4: TForm4
+  Left = 24
+  Height = 581
+  Top = 191
+  Width = 1059
+  Caption = 'Предмет'
+  ClientHeight = 581
+  ClientWidth = 1059
+  OnCreate = FormCreate
+  LCLVersion = '1.2.6.0'
+  object DBNavigator1: TDBNavigator
+    Left = 0
+    Height = 33
+    Top = 46
+    Width = 1059
+    Align = alTop
+    BevelOuter = bvNone
+    ChildSizing.EnlargeHorizontal = crsScaleChilds
+    ChildSizing.EnlargeVertical = crsScaleChilds
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 100
+    ClientHeight = 33
+    ClientWidth = 1059
+    DataSource = DataModule1.Datasource4
+    Options = []
+    TabOrder = 0
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Height = 502
+    Top = 79
+    Width = 1059
+    Align = alClient
+    Color = clWindow
+    Columns = <    
+      item
+        Font.Height = -13
+        Title.Caption = 'Краткое название'
+        Title.Font.Height = -15
+        FieldName = 'PREDMNAMEKRATK'
+      end    
+      item
+        Font.Height = -13
+        Title.Caption = 'Полное название'
+        Title.Font.Height = -15
+        FieldName = 'PREDMNAMEPOLN'
+      end    
+      item
+        Font.Height = -13
+        Title.Caption = 'Количество часов'
+        Title.Font.Height = -15
+        FieldName = 'PREDMCHASOV'
+      end>
+    DataSource = DataModule1.Datasource4
+    TabOrder = 1
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 46
+    Top = 0
+    Width = 1059
+    Align = alTop
+    ClientHeight = 46
+    ClientWidth = 1059
+    TabOrder = 2
+    object Button1: TButton
+      Left = 16
+      Height = 25
+      Top = 8
+      Width = 136
+      Caption = 'Номер семестра'
+      OnClick = Button1Click
+      TabOrder = 0
+    end
+  end
+end

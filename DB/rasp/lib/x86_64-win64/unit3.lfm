@@ -1,0 +1,240 @@
+object Form2: TForm2
+  Left = 296
+  Height = 522
+  Top = 192
+  Width = 958
+  Caption = 'Расписание'
+  ClientHeight = 522
+  ClientWidth = 958
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '1.2.6.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 74
+    Top = 0
+    Width = 958
+    Align = alTop
+    ClientHeight = 74
+    ClientWidth = 958
+    TabOrder = 0
+    OnClick = Panel1Click
+    object Button1: TButton
+      Left = 688
+      Height = 25
+      Top = 8
+      Width = 123
+      Caption = 'Выгрузить в Excel'
+      OnClick = Button1Click
+      TabOrder = 0
+    end
+    object Label3: TLabel
+      Left = 360
+      Height = 13
+      Top = 14
+      Width = 41
+      Caption = 'Дата до'
+      ParentColor = False
+      OnClick = Label3Click
+    end
+    object Label2: TLabel
+      Left = 232
+      Height = 13
+      Top = 14
+      Width = 40
+      Caption = 'Дата от'
+      ParentColor = False
+    end
+    object Label1: TLabel
+      Left = 120
+      Height = 13
+      Top = 14
+      Width = 68
+      Caption = 'День недели'
+      ParentColor = False
+      OnClick = Label1Click
+    end
+    object Edit3: TEdit
+      Left = 352
+      Height = 21
+      Top = 40
+      Width = 112
+      Enabled = False
+      OnChange = Edit3Change
+      OnClick = Edit3Click
+      TabOrder = 1
+    end
+    object Button4: TButton
+      Left = 8
+      Height = 25
+      Top = 40
+      Width = 91
+      Caption = 'Отмена'
+      OnClick = Button4Click
+      TabOrder = 2
+    end
+    object CheckBox1: TCheckBox
+      Left = 472
+      Height = 17
+      Top = 16
+      Width = 99
+      Caption = 'Учитывать дату'
+      OnChange = CheckBox1Change
+      TabOrder = 3
+    end
+    object Edit2: TEdit
+      Left = 232
+      Height = 21
+      Top = 40
+      Width = 112
+      OnChange = Edit2Change
+      OnClick = Edit2Click
+      TabOrder = 4
+    end
+    object Button3: TButton
+      Left = 8
+      Height = 25
+      Top = 8
+      Width = 91
+      Caption = 'Фильтриовать'
+      OnClick = Button3Click
+      TabOrder = 5
+    end
+    object Button2: TButton
+      Left = 824
+      Height = 25
+      Top = 8
+      Width = 107
+      Caption = 'Импорт из Excel'
+      OnClick = Button2Click
+      TabOrder = 6
+    end
+    object ComboBox1: TComboBox
+      Left = 120
+      Height = 21
+      Top = 40
+      Width = 100
+      ItemHeight = 13
+      Items.Strings = (
+        'ПН'
+        'ВТ'
+        'СР'
+        'ЧТ'
+        'ПТ'
+        'СБ'
+      )
+      TabOrder = 7
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 443
+    Top = 79
+    Width = 958
+    Align = alClient
+    Caption = 'Panel2'
+    ClientHeight = 443
+    ClientWidth = 958
+    TabOrder = 1
+    object DBGrid1: TDBGrid
+      Left = 1
+      Height = 409
+      Top = 33
+      Width = 956
+      Align = alClient
+      Color = clWindow
+      Columns = <      
+        item
+          Font.Height = -13
+          PickList.Strings = (
+            'ПН'
+            'ВТ'
+            'СР'
+            'ЧТ'
+            'ПТ'
+            'СБ'
+          )
+          Title.Caption = 'День'
+          Title.Font.Height = -15
+          FieldName = 'RASPDEN'
+        end      
+        item
+          Font.Height = -13
+          Title.Caption = 'Номер урока'
+          Title.Font.Height = -15
+          FieldName = 'NUROKA'
+        end      
+        item
+          Font.Height = -13
+          Title.Caption = 'Предмет'
+          Title.Font.Height = -15
+          FieldName = 'PREDMNAMEKRATK'
+        end      
+        item
+          Font.Height = -13
+          Title.Caption = 'Группа'
+          Title.Font.Height = -15
+          FieldName = 'GROUPNAME'
+        end      
+        item
+          Font.Height = -13
+          Title.Caption = 'Часов'
+          Title.Font.Height = -15
+          FieldName = 'RASPCHASOV'
+        end      
+        item
+          Font.Height = -13
+          Title.Caption = 'От'
+          Title.Font.Height = -15
+          FieldName = 'RASPOT'
+        end      
+        item
+          Font.Height = -13
+          Title.Caption = 'До'
+          Title.Font.Height = -15
+          FieldName = 'RASPDO'
+        end>
+      DataSource = DataModule1.Datasource2
+      TabOrder = 0
+    end
+    object DBNavigator1: TDBNavigator
+      Left = 1
+      Height = 32
+      Top = 1
+      Width = 956
+      Align = alTop
+      BevelOuter = bvNone
+      ChildSizing.EnlargeHorizontal = crsScaleChilds
+      ChildSizing.EnlargeVertical = crsScaleChilds
+      ChildSizing.ShrinkHorizontal = crsScaleChilds
+      ChildSizing.ShrinkVertical = crsScaleChilds
+      ChildSizing.Layout = cclLeftToRightThenTopToBottom
+      ChildSizing.ControlsPerLine = 100
+      ClientHeight = 32
+      ClientWidth = 956
+      DataSource = DataModule1.Datasource2
+      Options = []
+      TabOrder = 1
+    end
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 74
+    Width = 958
+    Align = alTop
+    ResizeAnchor = akTop
+  end
+  object CalendarDialog1: TCalendarDialog
+    Date = 41943
+    OKCaption = '&ОК'
+    CancelCaption = 'Отмена'
+    left = 616
+    top = 16
+  end
+  object OpenDialog1: TOpenDialog
+    left = 560
+    top = 16
+  end
+end

@@ -1,5 +1,5 @@
-connect  'D:\PR 11-03\uchebadb\demo.gdb'
-user 'SYSDBA' password 'masterkey'
+connect  'C:\Users\misha\Desktop\Compleate\DB\uchebadb\demo1.gdb'
+user 'MISHA' password 'MISHA'
 commit;
 create generator group_id_gen;
 commit;

@@ -1,0 +1,182 @@
+object Form6: TForm6
+  Left = 398
+  Height = 313
+  Top = 228
+  Width = 539
+  Caption = 'Импорт из Excel'
+  ClientHeight = 313
+  ClientWidth = 539
+  OnClose = FormClose
+  OnCreate = FormCreate
+  LCLVersion = '1.2.6.0'
+  object Label1: TLabel
+    Left = 16
+    Height = 13
+    Top = 16
+    Width = 58
+    Caption = 'Документ: '
+    ParentColor = False
+    OnClick = Label1Click
+  end
+  object Edit1: TEdit
+    Left = 93
+    Height = 21
+    Top = 16
+    Width = 371
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 16
+    Height = 25
+    Top = 49
+    Width = 75
+    Caption = 'Группы'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Memo1: TMemo
+    Left = 136
+    Height = 224
+    Top = 49
+    Width = 379
+    TabOrder = 2
+  end
+  object Button2: TButton
+    Left = 16
+    Height = 25
+    Top = 88
+    Width = 75
+    Caption = 'Предметы'
+    OnClick = Button2Click
+    TabOrder = 3
+  end
+  object Button3: TButton
+    Left = 16
+    Height = 25
+    Top = 128
+    Width = 75
+    Caption = 'Расписание'
+    OnClick = Button3Click
+    TabOrder = 4
+  end
+  object ImportSQL: TSQLQuery
+    FieldDefs = <>
+    Database = DataModule1.IBConnection1
+    Transaction = DataModule1.SQLTransaction1
+    SQL.Strings = (
+      'INSERT INTO Groups (GroupName) VALUES (:gName)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'gName'
+        ParamType = ptInput
+      end>
+    left = 16
+    top = 176
+  end
+  object CheckSQL: TSQLQuery
+    FieldDefs = <>
+    Database = DataModule1.IBConnection1
+    Transaction = DataModule1.SQLTransaction1
+    SQL.Strings = (
+      'select count(*) as gCount from groups'
+      '   where GroupName like :gName'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'gName'
+        ParamType = ptInput
+      end>
+    left = 64
+    top = 176
+  end
+  object ImportPredm: TSQLQuery
+    FieldDefs = <>
+    Database = DataModule1.IBConnection1
+    Transaction = DataModule1.SQLTransaction1
+    SQL.Strings = (
+      'insert into PREDMET'
+      '(PredmNameKratk)'
+      'values'
+      '(:pName)'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'pName'
+        ParamType = ptInput
+      end>
+    left = 16
+    top = 216
+  end
+  object CheckPredm: TSQLQuery
+    FieldDefs = <>
+    Database = DataModule1.IBConnection1
+    Transaction = DataModule1.SQLTransaction1
+    SQL.Strings = (
+      'select count(*) as pCount from predmet'
+      '   where PredmNameKratk like :pName'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'pName'
+        ParamType = ptInput
+      end>
+    left = 64
+    top = 224
+  end
+  object ImportRasp: TSQLQuery
+    FieldDefs = <>
+    Database = DataModule1.IBConnection1
+    Transaction = DataModule1.SQLTransaction1
+    SQL.Strings = (
+      'insert into RASPISANIE'
+      '(RaspDen,GroupID,PredmID,nUroka)'
+      'values (:RaspDen,:GroupID,:PredmID,:nUroka)'
+      ''
+      ''
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'RaspDen'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'GroupID'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'PredmID'
+        ParamType = ptInput
+      end    
+      item
+        DataType = ftUnknown
+        Name = 'nUroka'
+        ParamType = ptInput
+      end>
+    left = 16
+    top = 264
+  end
+  object SQLQuery4: TSQLQuery
+    FieldDefs = <>
+    SQL.Strings = (
+      'select count(*) as rCount from raspisane'
+      '   where /*Вставить свое*/ like :rName'
+    )
+    Params = <    
+      item
+        DataType = ftUnknown
+        Name = 'rName'
+        ParamType = ptInput
+      end>
+    left = 64
+    top = 264
+  end
+end

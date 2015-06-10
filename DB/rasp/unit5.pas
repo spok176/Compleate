@@ -42,13 +42,15 @@ end;
 
 procedure TForm4.FormCreate(Sender: TObject);
 begin
-    datamodule1.IBconnection1.close;
-    datamodule1.IBconnection1.open;
+
 end;
 
 procedure TForm4.Button1Click(Sender: TObject);
 begin
-     Form5.show;
+  form5:=TForm5.Create(Application);
+  form5.ShowModal;
+  form5.Free;
+  //Form5.show;
 end;
 
 end.

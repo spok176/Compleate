@@ -1,14 +1,14 @@
 object Form3: TForm3
-  Left = 584
+  Left = 243
   Height = 569
-  Top = 173
+  Top = 174
   Width = 1007
   Caption = 'Группы'
   ClientHeight = 569
   ClientWidth = 1007
   OnClose = FormClose
   OnCreate = FormCreate
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.2.6.0'
   object DBNavigator1: TDBNavigator
     Left = 0
     Height = 32

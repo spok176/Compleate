@@ -1,10 +1,10 @@
 set sql dialect 3;
-create database 'D:\PR 11-03\uchebadb\demo.gdb'
-user 'SYSDBA' password 'masterkey'
-default character set WIN1251;
+create database 'C:\Users\misha\Desktop\Compleate\DB\uchebadb\demo1.gdb'
+user 'MISHA' password 'MISHA'
+default character set UTF8;
 commit;
-connect  'D:\PR 11-03\uchebadb\demo.gdb'
-user 'SYSDBA' password 'masterkey'
+connect  'C:\Users\misha\Desktop\Compleate\DB\uchebadb\demo1.gdb'
+user 'MISHA' password 'MISHA'
 commit;
 create table PREDMET
 (PredmID numeric not null primary key,
@@ -22,7 +22,8 @@ sYear numeric
 commit;
 create table RASPISANIE
 (RaspID numeric not null primary key,
-RaspDen varchar(10), 
+RaspDen varchar(10),
+RaspKab varchar(100),
 GroupID numeric references GROUPS(GroupID) on update cascade on delete set null,
 PredmID  numeric references PREDMET(PredmID) on update cascade on delete set null,
 nUroka numeric,

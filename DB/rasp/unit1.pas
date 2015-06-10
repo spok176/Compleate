@@ -39,6 +39,7 @@ type
     procedure Edit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
     procedure Panel2Click(Sender: TObject);
   private
     { private declarations }
@@ -59,6 +60,8 @@ uses Unit2, Unit3, Unit4, Unit5, Unit6;
 procedure TForm1.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
   DataModule1.IBConnection1.Close;
+  //DataModule1.Destroy;
+  //Application.Destroy;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -69,6 +72,11 @@ begin
   //Edit1.Text:=ini.ReadString('FORM','Caption','Default string');
 end;
 
+procedure TForm1.Panel1Click(Sender: TObject);
+begin
+
+end;
+
 procedure TForm1.Panel2Click(Sender: TObject);
 begin
 
@@ -76,22 +84,34 @@ end;
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  Form2.show;
+  form2:=TForm2.Create(Application);
+  form2.ShowModal;
+  form2.Free;
+  //Form2.show;
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-   Form3.show;
+  form3:=TForm3.Create(Application);
+  form3.ShowModal;
+  form3.Free;
+  //Form3.show;
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
 begin
-  Form4.show;
+  form4:=TForm4.Create(Application);
+  form4.ShowModal;
+  form4.Free;
+  //Form4.show;
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 begin
-  Form5.show;
+  form5:=TForm5.Create(Application);
+  form5.ShowModal;
+  form5.Free;
+  //Form5.show;
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);

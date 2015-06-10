@@ -44,8 +44,7 @@ end;
 
 procedure TForm5.FormCreate(Sender: TObject);
 begin
-  datamodule1.IBconnection1.close;
-  datamodule1.IBconnection1.open;
+
 end;
 
 procedure TForm5.StatusBar1Click(Sender: TObject);
